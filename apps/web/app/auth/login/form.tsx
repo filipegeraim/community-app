@@ -1,10 +1,11 @@
 'use client';
 import { Button, Stack } from '@mui/material';
 import { FormContainer, TextFieldElement } from 'react-hook-form-mui';
+import { AuthInput } from 'types';
 
-export default function Form({ onSubmit }: { onSubmit: (data: any) => void }) {
+export default function LoginForm({ onSubmit }: { onSubmit: (data: AuthInput) => void }) {
 	return (
-		<FormContainer defaultValues={{ email: '', password: '' }} onSuccess={(data) => onSubmit(data)}>
+		<FormContainer<AuthInput> defaultValues={{ email: '', password: '' }} onSuccess={(data) => onSubmit(data)}>
 			<Stack>
 				<TextFieldElement name="email" label="Email" required />
 				<TextFieldElement name="password" label="Password" required />
