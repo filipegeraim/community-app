@@ -3,30 +3,17 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export class NamingStrategy extends SnakeNamingStrategy {
-  foreignKeyName(
-    tableOrName: Table | string,
-    columnNames: string[],
-    referencedTablePath?: string,
-  ): string {
-    tableOrName =
-      typeof tableOrName === 'string' ? tableOrName : tableOrName.name;
-    const name = columnNames.reduce(
-      (name, column) => `${name}_${column}`,
-      `${tableOrName}_${referencedTablePath}`,
-    );
+  foreignKeyName(tableOrName: Table | string, columnNames: string[], referencedTablePath?: string): string {
+    tableOrName = typeof tableOrName === 'string' ? tableOrName : tableOrName.name;
+    const name = columnNames.reduce((name, column) => `${name}_${column}`, `${tableOrName}_${referencedTablePath}`);
     return `fk_${name}`;
   }
   primaryKeyName(tableOrName: string | Table, columnNames: string[]): string {
-    tableOrName =
-      typeof tableOrName === 'string' ? tableOrName : tableOrName.name;
+    tableOrName = typeof tableOrName === 'string' ? tableOrName : tableOrName.name;
     return `pk_${tableOrName}`;
   }
-  uniqueConstraintName(
-    tableOrName: string | Table,
-    columnNames: string[],
-  ): string {
-    tableOrName =
-      typeof tableOrName === 'string' ? tableOrName : tableOrName.name;
+  uniqueConstraintName(tableOrName: string | Table, columnNames: string[]): string {
+    tableOrName = typeof tableOrName === 'string' ? tableOrName : tableOrName.name;
     return `uq_${tableOrName}_${columnNames.join('_')}`;
   }
 }

@@ -1,25 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { UserInput } from 'types';
+import { User } from './entities/user.entity';
+import { BaseService } from 'helpers/service/base.service';
+import { DataSource } from 'typeorm';
 
 @Injectable()
-export class UsersService {
-  create(payload: UserInput) {
-    return 'This action adds a new user';
+export class UsersService extends BaseService<User> {
+  constructor(dataSource: DataSource) {
+    super(User, dataSource);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  create(payload: UserInput): Promise<User> {
+    return super.create(payload);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findAll(): Promise<User[]> {
+    return super.findAll();
   }
 
-  update(id: number, payload: UserInput) {
-    return `This action updates a #${id} user`;
+  findOne(id: number): Promise<User> {
+    return;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  update(id: number, payload: UserInput): Promise<User> {
+    return;
+  }
+
+  remove(id: number): void {
+    //void
   }
 }

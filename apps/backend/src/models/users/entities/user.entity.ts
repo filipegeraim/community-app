@@ -1,10 +1,10 @@
-import { Entity, ObjectId, ObjectIdColumn, Column } from 'typeorm';
+import { Entity, ObjectIdColumn, Column } from 'typeorm';
 import { UserDef } from 'types';
 
 @Entity()
-export class User {
-  @ObjectIdColumn()
-  id: ObjectId;
+export class User implements UserDef {
+  @ObjectIdColumn({ type: 'string' })
+  id: string;
   @Column()
   name: string;
   @Column()
