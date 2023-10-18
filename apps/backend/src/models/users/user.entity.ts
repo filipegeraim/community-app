@@ -20,11 +20,4 @@ export class User extends BaseEntity implements UserDef {
   async beforeInsert() {
     this.password = await encryptPassword(this.password);
   }
-
-  @BeforeUpdate()
-  async beforeUpdate() {
-    if (this.password != null) {
-      this.password = await encryptPassword(this.password);
-    }
-  }
 }

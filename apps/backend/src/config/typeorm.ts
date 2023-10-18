@@ -1,4 +1,4 @@
-import { DataSource, DataSourceOptions, Table } from 'typeorm';
+import { Table } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
@@ -18,15 +18,11 @@ export class NamingStrategy extends SnakeNamingStrategy {
   }
 }
 
-// export default new DataSource({
-//   ...dsOptions,
-//   migrations: ['./migrations/*.js'],
-// });
 export class TypeOrmConfig {
   static config(): TypeOrmModuleOptions {
     return {
       autoLoadEntities: true,
-      database: './src/database/db.sqlite',
+      database: process.env.DATABASE,
       type: 'sqlite',
       logging: true,
       synchronize: true,
