@@ -2,7 +2,6 @@
 
 # dependencies
 node_modules
-dist
 .pnp
 .pnp.js
 
@@ -38,3 +37,6 @@ yarn-error.log*
 
 # sqlite
 *.sqlite
+
+# backend
+dist
