@@ -1,5 +1,4 @@
 import {
-  Repository,
   ObjectLiteral,
   EntityMetadata,
   FindManyOptions,
@@ -7,6 +6,7 @@ import {
   DataSource,
   EntityTarget,
   FindOptionsWhere,
+  Repository,
 } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 
@@ -50,7 +50,7 @@ export abstract class BaseService<M extends ObjectLiteral> {
     const entity = await this.findByPk(pk);
     return await this.save(this.repository.merge(entity, payload));
   }
-  protected async delete(pk: any | FindOptionsWhere<M>): Promise<void> {
+  protected async remove(pk: any | FindOptionsWhere<M>): Promise<void> {
     await this.repository.delete(pk);
   }
 }

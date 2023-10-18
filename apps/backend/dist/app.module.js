@@ -11,15 +11,14 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const users_module_1 = require("./models/users/users.module");
 const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("./config/typeorm");
-const user_entity_1 = require("./models/users/entities/user.entity");
+const config_2 = require("./config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot(),
-            typeorm_1.TypeOrmModule.forRoot(Object.assign(Object.assign({}, typeorm_2.TypeOrmConfig.config()), { autoLoadEntities: true, entities: [user_entity_1.User] })),
+            config_1.ConfigModule.forRoot({ isGlobal: true, validationSchema: config_2.validationSchemaForEnv }),
+            typeorm_1.TypeOrmModule.forRoot(Object.assign({}, config_2.TypeOrmConfig.config())),
             users_module_1.UsersModule,
         ],
         controllers: [],

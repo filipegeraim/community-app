@@ -26,13 +26,13 @@ let UsersController = class UsersController {
         return this.usersService.findAll();
     }
     findOne(id) {
-        return this.usersService.findOne(+id);
+        return this.usersService.findByPk(id);
     }
     update(id, payload) {
-        return this.usersService.update(+id, payload);
+        return this.usersService.update(id, payload);
     }
     remove(id) {
-        return this.usersService.remove(+id);
+        return this.usersService.remove(id);
     }
 };
 __decorate([
@@ -50,24 +50,24 @@ __decorate([
 ], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "remove", null);
 UsersController = __decorate([

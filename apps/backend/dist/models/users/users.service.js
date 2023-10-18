@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const user_entity_1 = require("./entities/user.entity");
+const user_entity_1 = require("./user.entity");
 const base_service_1 = require("../../helpers/service/base.service");
 const typeorm_1 = require("typeorm");
 let UsersService = class UsersService extends base_service_1.BaseService {
@@ -24,13 +24,14 @@ let UsersService = class UsersService extends base_service_1.BaseService {
     findAll() {
         return super.findAll();
     }
-    findOne(id) {
-        return;
+    async findByPk(pk) {
+        return super.findByPk(pk);
     }
-    update(id, payload) {
-        return;
+    update(pk, payload) {
+        return super.update(pk, payload);
     }
-    remove(id) {
+    remove(pk) {
+        return super.remove(pk);
     }
 };
 UsersService = __decorate([

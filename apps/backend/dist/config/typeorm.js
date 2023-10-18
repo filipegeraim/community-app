@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeOrmConfig = exports.NamingStrategy = void 0;
-const typeorm_1 = require("typeorm");
 const typeorm_naming_strategies_1 = require("typeorm-naming-strategies");
 class NamingStrategy extends typeorm_naming_strategies_1.SnakeNamingStrategy {
     foreignKeyName(tableOrName, columnNames, referencedTablePath) {
@@ -19,19 +18,16 @@ class NamingStrategy extends typeorm_naming_strategies_1.SnakeNamingStrategy {
     }
 }
 exports.NamingStrategy = NamingStrategy;
-const dsOptions = {
-    host: 'localhost',
-    port: 27017,
-    database: 'community',
-    type: 'mongodb',
-    logging: true,
-    synchronize: true,
-    namingStrategy: new NamingStrategy(),
-};
-exports.default = new typeorm_1.DataSource(Object.assign(Object.assign({}, dsOptions), { migrations: ['./migrations/*.js'] }));
 class TypeOrmConfig {
     static config() {
-        return dsOptions;
+        return {
+            autoLoadEntities: true,
+            database: './src/database/db.sqlite',
+            type: 'sqlite',
+            logging: true,
+            synchronize: true,
+            namingStrategy: new NamingStrategy(),
+        };
     }
 }
 exports.TypeOrmConfig = TypeOrmConfig;

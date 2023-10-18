@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UserInput } from 'types';
-import { User } from './entities/user.entity';
+import { User } from './user.entity';
 import { BaseService } from 'helpers/service/base.service';
 import { DataSource } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class UsersService extends BaseService<User> {
@@ -18,15 +19,15 @@ export class UsersService extends BaseService<User> {
     return super.findAll();
   }
 
-  findOne(id: number): Promise<User> {
-    return;
+  async findByPk(pk: number): Promise<User> {
+    return super.findByPk(pk);
   }
 
-  update(id: number, payload: UserInput): Promise<User> {
-    return;
+  update(pk: number, payload: UserInput): Promise<User> {
+    return super.update(pk, payload);
   }
 
-  remove(id: number): void {
-    //void
+  remove(pk: number): Promise<void> {
+    return super.remove(pk);
   }
 }

@@ -18,22 +18,19 @@ export class NamingStrategy extends SnakeNamingStrategy {
   }
 }
 
-const dsOptions: DataSourceOptions = {
-  host: 'localhost',
-  port: 27017,
-  database: 'community',
-  type: 'mongodb',
-  logging: true,
-  synchronize: true,
-  namingStrategy: new NamingStrategy(),
-};
-
-export default new DataSource({
-  ...dsOptions,
-  migrations: ['./migrations/*.js'],
-});
+// export default new DataSource({
+//   ...dsOptions,
+//   migrations: ['./migrations/*.js'],
+// });
 export class TypeOrmConfig {
   static config(): TypeOrmModuleOptions {
-    return dsOptions;
+    return {
+      autoLoadEntities: true,
+      database: './src/database/db.sqlite',
+      type: 'sqlite',
+      logging: true,
+      synchronize: true,
+      namingStrategy: new NamingStrategy(),
+    };
   }
 }

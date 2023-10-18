@@ -1,4 +1,4 @@
-import { Repository, ObjectLiteral, FindManyOptions, FindOneOptions, DataSource, EntityTarget, FindOptionsWhere } from 'typeorm';
+import { ObjectLiteral, FindManyOptions, FindOneOptions, DataSource, EntityTarget, FindOptionsWhere, Repository } from 'typeorm';
 export declare abstract class BaseService<M extends ObjectLiteral> {
     private readonly model;
     private readonly dataSource;
@@ -12,5 +12,5 @@ export declare abstract class BaseService<M extends ObjectLiteral> {
     private save;
     protected create(payload: any): Promise<M>;
     protected update(pk: any, payload: any): Promise<M>;
-    protected delete(pk: any | FindOptionsWhere<M>): Promise<void>;
+    protected remove(pk: any | FindOptionsWhere<M>): Promise<void>;
 }

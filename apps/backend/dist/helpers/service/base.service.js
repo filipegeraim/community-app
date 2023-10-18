@@ -39,7 +39,7 @@ class BaseService {
         const entity = await this.findByPk(pk);
         return await this.save(this.repository.merge(entity, payload));
     }
-    async delete(pk) {
+    async remove(pk) {
         await this.repository.delete(pk);
     }
 }
