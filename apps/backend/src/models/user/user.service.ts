@@ -3,10 +3,9 @@ import { UserInput } from 'types';
 import { User } from './user.entity';
 import { BaseService } from 'helpers/service/base.service';
 import { DataSource } from 'typeorm';
-import { ObjectId } from 'mongodb';
 
 @Injectable()
-export class UsersService extends BaseService<User> {
+export class UserService extends BaseService<User> {
   constructor(dataSource: DataSource) {
     super(User, dataSource);
   }
@@ -19,12 +18,16 @@ export class UsersService extends BaseService<User> {
     return super.findAll();
   }
 
-  async findByPk(pk: number): Promise<User> {
+  findByPk(pk: number): Promise<User> {
     return super.findByPk(pk);
   }
 
   update(pk: number, payload: UserInput): Promise<User> {
     return super.update(pk, payload);
+  }
+
+  findByEmail(email: string): Promise<User> {
+    return super.repository.findOne({ where: { email: email.toLowerCase().trim() } });
   }
 
   remove(pk: number): Promise<void> {

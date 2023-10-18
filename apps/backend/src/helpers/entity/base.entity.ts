@@ -1,10 +1,15 @@
 import { Type, instanceToPlain } from 'class-transformer';
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { KeyDef } from 'types';
 
-export class BaseEntity implements KeyDef {
+export abstract class BaseEntity implements KeyDef {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   toJSON() {
     return instanceToPlain(this);

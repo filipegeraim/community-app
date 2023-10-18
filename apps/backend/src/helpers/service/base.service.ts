@@ -30,10 +30,9 @@ export abstract class BaseService<M extends ObjectLiteral> {
   protected async findAll(options?: FindManyOptions<M>) {
     return await this.repository.find(options);
   }
-  protected async findByPk(pk: string | object | any, options?: FindOneOptions<M>): Promise<M> {
-    const key = typeof pk === 'object' ? pk : { id: pk };
+  protected async findByPk(pk: any, options?: FindOneOptions<M>): Promise<M> {
     const entity = await this.repository.findOne({
-      where: { ...key },
+      where: { id: pk },
       ...options,
     });
     if (entity === null) {
