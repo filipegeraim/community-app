@@ -1,9 +1,9 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { comparePassword } from 'helpers/encryption';
 import { User } from 'models/user/user.entity';
 import { UserService } from 'models/user/user.service';
-import { AuthInput, AuthOutput } from 'types';
+import type { AuthInput, AuthJwt, AuthOutput } from 'types';
 
 @Injectable()
 export class AuthService {
@@ -14,13 +14,14 @@ export class AuthService {
     if (user && comparePassword(payload.password, user.password)) {
       return user;
     }
-    throw new ForbiddenException();
+    throw new UnauthorizedException();
   }
 
   async login(payload: AuthInput): Promise<AuthOutput> {
     const user = await this.validate(payload);
+    const jwt: AuthJwt = { sub: user.id, name: user.name };
     return {
-      accessToken: this.jwtService.sign({ user }),
+      accessToken: this.jwtService.sign(jwt),
       prefix: 'Bearer',
     };
   }

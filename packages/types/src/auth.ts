@@ -3,6 +3,11 @@ export type AuthInput = {
 	password: string;
 };
 
+export type AuthJwt = {
+	sub: number;
+	name: string;
+};
+
 export type AuthOutput = {
 	accessToken: string;
 	prefix: string;
