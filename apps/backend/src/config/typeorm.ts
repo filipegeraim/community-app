@@ -1,6 +1,7 @@
 import { Table } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
 
 export class NamingStrategy extends SnakeNamingStrategy {
   foreignKeyName(tableOrName: Table | string, columnNames: string[], referencedTablePath?: string): string {
@@ -19,10 +20,10 @@ export class NamingStrategy extends SnakeNamingStrategy {
 }
 
 export class TypeOrmConfig {
-  static config(): TypeOrmModuleOptions {
+  static config(configService: ConfigService): TypeOrmModuleOptions {
     return {
       autoLoadEntities: true,
-      database: process.env.DATABASE,
+      database: configService.get<string>('DATABASE'),
       type: 'sqlite',
       logging: true,
       synchronize: true,
