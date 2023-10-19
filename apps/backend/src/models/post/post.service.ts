@@ -2,9 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { BaseService } from 'helpers/service/base.service';
 import { PostInput } from 'types';
 import { Post } from './post.entity';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class PostService extends BaseService<Post> {
+  constructor(readonly dataSource: DataSource) {
+    super(Post, dataSource);
+  }
+
   create(payload: PostInput): Promise<Post> {
     return super.create(payload);
   }
@@ -21,7 +26,7 @@ export class PostService extends BaseService<Post> {
     return super.update(pk, payload);
   }
 
-  remove(pk: number): Promise<void> {
-    return super.remove(pk);
+  remove(pk: number) {
+    super.remove(pk);
   }
 }

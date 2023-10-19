@@ -27,10 +27,10 @@ export class UserService extends BaseService<User> {
   }
 
   findByEmail(email: string): Promise<User> {
-    return super.repository.findOne({ where: { email: email.toLowerCase().trim() } });
+    return this.repository.findOne({ where: { email: email.toLowerCase().trim() } });
   }
 
-  remove(pk: number): Promise<void> {
-    return super.remove(pk);
+  remove(pk: number) {
+    super.remove(pk);
   }
 }

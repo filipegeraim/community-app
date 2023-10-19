@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Req } from '@nestjs/common';
 import { PostService } from './post.service';
 import { PostInput } from 'types';
 
@@ -7,7 +7,8 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Post()
-  create(@Body() payload: PostInput) {
+  create(@Body() payload: PostInput, @Req() req) {
+    console.log(req);
     return this.postService.create(payload);
   }
 
