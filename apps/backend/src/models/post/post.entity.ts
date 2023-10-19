@@ -1,15 +1,17 @@
+import type { PostDef } from 'types';
 import { Type } from 'class-transformer';
-import { BaseEntity } from 'helpers/entity/base.entity';
 import { User } from 'models/user/user.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
-import { PostDef } from 'types';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { DescriptionEntity } from 'helpers/entity/description.entity';
+import { Reply } from 'models/reply/reply.entity';
 
 @Entity()
-export class Post extends BaseEntity implements PostDef {
+export class Post extends DescriptionEntity implements PostDef {
   @Column({ length: 50 })
   title: string;
-  @Column({ length: 200 })
-  description: string;
-  @ManyToOne(() => User, (entity) => entity.posts, { nullable: true })
+  @ManyToOne(() => User, (entity) => entity.posts)
+  @Type(() => User)
   user: User;
+  @OneToMany(() => Reply, (entity) => entity.post, { nullable: true })
+  replies?: Reply[];
 }

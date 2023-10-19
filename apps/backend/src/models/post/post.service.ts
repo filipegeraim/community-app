@@ -18,15 +18,15 @@ export class PostService extends BaseService<Post> {
     return super.findAll();
   }
 
-  findByPk(pk: number): Promise<Post> {
-    return super.findByPk(pk);
+  findByPk(id: number): Promise<Post> {
+    return super.findByPk(id);
   }
 
-  update(pk: number, payload: PostInput): Promise<Post> {
-    return super.update(pk, payload);
+  update(id: number, payload: PostInput): Promise<Post> {
+    return super.update(id, payload);
   }
 
-  remove(pk: number) {
-    super.remove(pk);
+  remove(id: number) {
+    super.remove(id);
   }
 }

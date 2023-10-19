@@ -1,15 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ReplyService } from './reply.service';
-import { CreateReplyDto } from './dto/create-reply.dto';
-import { UpdateReplyDto } from './dto/update-reply.dto';
+import type { ReplyInput } from 'types';
 
 @Controller('reply')
 export class ReplyController {
   constructor(private readonly replyService: ReplyService) {}
 
   @Post()
-  create(@Body() createReplyDto: CreateReplyDto) {
-    return this.replyService.create(createReplyDto);
+  create(@Body() payload: ReplyInput) {
+    return this.replyService.create(payload);
   }
 
   @Get()
@@ -18,17 +17,17 @@ export class ReplyController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.replyService.findOne(+id);
+  findByPk(@Param('id', ParseIntPipe) id: number) {
+    return this.replyService.findByPk(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReplyDto: UpdateReplyDto) {
-    return this.replyService.update(+id, updateReplyDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() payload: ReplyInput) {
+    return this.replyService.update(id, payload);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.replyService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.replyService.remove(id);
   }
 }

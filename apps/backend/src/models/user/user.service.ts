@@ -18,19 +18,19 @@ export class UserService extends BaseService<User> {
     return super.findAll();
   }
 
-  findByPk(pk: number): Promise<User> {
-    return super.findByPk(pk);
+  findByPk(id: number): Promise<User> {
+    return super.findByPk(id);
   }
 
-  update(pk: number, payload: UserInput): Promise<User> {
-    return super.update(pk, payload);
+  update(id: number, payload: UserInput): Promise<User> {
+    return super.update(id, payload);
   }
 
   findByEmail(email: string): Promise<User> {
     return this.repository.findOne({ where: { email: email.toLowerCase().trim() } });
   }
 
-  remove(pk: number) {
-    super.remove(pk);
+  remove(id: number) {
+    super.remove(id);
   }
 }

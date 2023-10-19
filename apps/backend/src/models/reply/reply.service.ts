@@ -1,26 +1,32 @@
+import type { ReplyInput } from 'types';
 import { Injectable } from '@nestjs/common';
-import { CreateReplyDto } from './dto/create-reply.dto';
-import { UpdateReplyDto } from './dto/update-reply.dto';
+import { BaseService } from 'helpers/service/base.service';
+import { Reply } from './reply.entity';
+import { DataSource } from 'typeorm';
 
 @Injectable()
-export class ReplyService {
-  create(createReplyDto: CreateReplyDto) {
-    return 'This action adds a new reply';
+export class ReplyService extends BaseService<Reply> {
+  constructor(readonly dataSource: DataSource) {
+    super(Reply, dataSource);
   }
 
-  findAll() {
-    return `This action returns all reply`;
+  create(payload: ReplyInput): Promise<Reply> {
+    return super.create(payload);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reply`;
+  findAll(): Promise<Reply[]> {
+    return super.findAll();
   }
 
-  update(id: number, updateReplyDto: UpdateReplyDto) {
-    return `This action updates a #${id} reply`;
+  findByPk(id: number): Promise<Reply> {
+    return super.findByPk(id);
+  }
+
+  update(id: number, payload: ReplyInput): Promise<Reply> {
+    return super.update(id, payload);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} reply`;
+    super.remove(id);
   }
 }

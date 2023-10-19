@@ -1,6 +1,6 @@
-import { Exclude, Type, instanceToPlain } from 'class-transformer';
+import type { KeyDef } from 'types';
+import { Exclude, instanceToPlain } from 'class-transformer';
 import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { KeyDef } from 'types';
 
 export abstract class BaseEntity implements KeyDef {
   @PrimaryGeneratedColumn()
