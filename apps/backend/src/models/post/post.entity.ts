@@ -7,6 +7,10 @@ import { Reply } from 'models/reply/reply.entity';
 
 @Entity()
 export class Post extends DescriptionEntity implements PostDef {
+  constructor(id?: number) {
+    super(id);
+  }
+
   @Column({ length: 50 })
   title: string;
   @OneToMany(() => Reply, (entity) => entity.post, { nullable: true })

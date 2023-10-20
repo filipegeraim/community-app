@@ -3,6 +3,10 @@ import { Exclude, instanceToPlain } from 'class-transformer';
 import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 export abstract class BaseEntity implements Key {
+  constructor(id?: number) {
+    this.id = id;
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 
