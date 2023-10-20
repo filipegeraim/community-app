@@ -1,12 +1,10 @@
-import { DescriptionDef } from './description';
-import { KeyDef } from './key';
+import { CreatedBy } from './created-by';
+import { Description } from './description';
+import { Key } from './key';
 import { PostDef } from './post';
-import { UserDef } from './user';
 
-export interface ReplyDef extends DescriptionDef {
-	description: string;
-	user: UserDef;
+export interface ReplyDef extends Description, CreatedBy, Key {
 	post: PostDef;
 }
 
-export type ReplyInput = Omit<ReplyDef, keyof KeyDef>;
+export type ReplyInput = Omit<ReplyDef, keyof Key>;

@@ -1,8 +1,8 @@
-import { KeyDef } from './key';
+import { Key } from './key';
 import { PostDef } from './post';
 import { ReplyDef } from './reply';
 
-export interface UserDef extends KeyDef {
+export interface UserDef extends Key {
 	name: string;
 	email: string;
 	password: string;
@@ -10,4 +10,4 @@ export interface UserDef extends KeyDef {
 	replies?: ReplyDef[];
 }
 
-export type UserInput = Omit<UserDef, keyof KeyDef>;
+export type UserInput = Omit<UserDef, keyof Key>;

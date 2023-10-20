@@ -9,9 +9,9 @@ import { Reply } from 'models/reply/reply.entity';
 export class Post extends DescriptionEntity implements PostDef {
   @Column({ length: 50 })
   title: string;
-  @ManyToOne(() => User, (entity) => entity.posts)
-  @Type(() => User)
-  user: User;
   @OneToMany(() => Reply, (entity) => entity.post, { nullable: true })
   replies?: Reply[];
+  @ManyToOne(() => User, (entity) => entity.posts)
+  @Type(() => User)
+  createdBy: User;
 }

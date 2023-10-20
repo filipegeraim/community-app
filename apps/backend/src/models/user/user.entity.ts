@@ -15,9 +15,9 @@ export class User extends BaseEntity implements UserDef {
   @Column()
   @Exclude({ toPlainOnly: true })
   password: string;
-  @OneToMany(() => Post, (entity) => entity.user, { nullable: true })
+  @OneToMany(() => Post, (entity) => entity.createdBy, { nullable: true })
   posts?: Post[];
-  @OneToMany(() => Post, (entity) => entity.user, { nullable: true })
+  @OneToMany(() => Post, (entity) => entity.createdBy, { nullable: true })
   replies?: Reply[];
 
   @BeforeInsert()

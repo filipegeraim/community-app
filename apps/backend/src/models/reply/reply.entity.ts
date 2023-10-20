@@ -7,10 +7,10 @@ import type { ReplyDef } from 'types';
 
 @Entity()
 export class Reply extends DescriptionEntity implements ReplyDef {
-  @ManyToOne(() => User, (entity) => entity.replies)
-  @Type(() => User)
-  user: User;
   @ManyToOne(() => Post, (entity) => entity.replies)
   @Type(() => Post)
   post: Post;
+  @ManyToOne(() => User, (entity) => entity.replies)
+  @Type(() => User)
+  createdBy: User;
 }

@@ -1,5 +1,5 @@
-import { VersionDef } from './version';
+import { Version } from './version';
 
-export interface KeyDef extends VersionDef {
+export type Key = Version & {
 	readonly id: number;
-}
+};

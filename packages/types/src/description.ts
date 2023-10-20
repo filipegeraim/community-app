@@ -1,5 +1,3 @@
-import type { KeyDef } from './key';
-
-export interface DescriptionDef extends KeyDef {
+export type Description = {
 	description: string;
-}
+};

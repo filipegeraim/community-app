@@ -7,8 +7,7 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Post()
-  create(@Body() payload: PostInput, @Req() req) {
-    console.log(req);
+  create(@Body() payload: PostInput) {
     return this.postService.create(payload);
   }
 
