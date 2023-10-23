@@ -4,8 +4,12 @@ import { FormContainer, TextFieldElement } from 'react-hook-form-mui';
 import { AuthInput } from 'types';
 
 export default function LoginForm({ onSubmit }: { onSubmit: (data: AuthInput) => void }) {
+	const handleSubmit = async (data) => {
+		console.log(await onSubmit(data));
+	};
+
 	return (
-		<FormContainer<AuthInput> defaultValues={{ email: '', password: '' }} onSuccess={(data) => onSubmit(data)}>
+		<FormContainer<AuthInput> defaultValues={{ email: '', password: '' }} onSuccess={handleSubmit}>
 			<Stack>
 				<TextFieldElement name="email" label="Email" required />
 				<TextFieldElement name="password" label="Password" required />

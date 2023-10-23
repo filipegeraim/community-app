@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserInput } from 'types';
 import { User } from './user.entity';
 import { BaseService } from 'helpers/service/base.service';
@@ -10,8 +10,13 @@ export class UserService extends BaseService<User> {
     super(User, dataSource);
   }
 
-  create(payload: UserInput): Promise<User> {
-    return super.create(payload);
+  async create(payload: UserInput): Promise<User> {
+    const exist = await this.repository.exist({ where: { email: payload.email.toLowerCase().trim() } });
+    if (exist) {
+      throw new BadRequestException('User already exists.');
+    } else {
+      return super.create(payload);
+    }
   }
 
   findAll(): Promise<User[]> {
