@@ -2,6 +2,7 @@
 import { revalidatePath } from 'next/cache';
 import { Fetch } from '_types';
 import { UserInput } from 'types';
+import { handleResult } from '_helpers/fetch';
 
 export async function register(prevState: any, payload: UserInput): Promise<Fetch> {
 	const result = await fetch(`${process.env.BASE_URL}/auth/register`, {
@@ -11,11 +12,8 @@ export async function register(prevState: any, payload: UserInput): Promise<Fetc
 		},
 		method: 'POST',
 	});
-	const json = await result.json();
-	if (result.ok) {
+	return handleResult(result, () => {
 		revalidatePath('/auth/register');
-		return { message: 'Register is completed' };
-	} else {
-		return { error: json.message };
-	}
+		return { message: 'Registered Successfully' };
+	});
 }

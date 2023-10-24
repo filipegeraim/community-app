@@ -1,7 +1,6 @@
 'use client';
 import { Card, CardContent, CardHeader, Container, Stack, Link } from '@mui/material';
 import LoginForm from './form';
-import { login } from './actions';
 
 export default function LoginPage(): JSX.Element {
 	return (
@@ -10,7 +9,7 @@ export default function LoginPage(): JSX.Element {
 				<CardHeader title="Login" subheader="Access your community" />
 				<CardContent>
 					<Stack textAlign={'center'}>
-						<LoginForm onSubmit={login} />
+						<LoginForm />
 						<Link href="/auth/register">Create an account</Link>
 						<Link href="/auth/register">I forgot my password</Link>
 					</Stack>

@@ -1,18 +1,30 @@
 'use client';
 import { Button, Stack } from '@mui/material';
-import { FormContainer, TextFieldElement } from 'react-hook-form-mui';
+import { FormContainer, TextFieldElement, useForm } from 'react-hook-form-mui';
 import { AuthInput } from 'types';
+import { login } from './actions';
+import { Fetch } from '_types';
+import {
+	//@ts-ignore
+	experimental_useFormState as useFormState,
+} from 'react-dom';
 
-export default function LoginForm({ onSubmit }: { onSubmit: (data: AuthInput) => void }) {
-	const handleSubmit = async (data) => {
-		console.log(await onSubmit(data));
-	};
+const initialState: Fetch = {
+	message: '',
+	error: '',
+};
+
+export default function LoginForm() {
+	const formContext = useForm<AuthInput>({
+		defaultValues: { email: '', password: '' },
+	});
+	const [state, formAction] = useFormState(login, initialState);
 
 	return (
-		<FormContainer<AuthInput> defaultValues={{ email: '', password: '' }} onSuccess={handleSubmit}>
+		<FormContainer FormProps={{ autoComplete: 'off' }} formContext={formContext} onSuccess={formAction}>
 			<Stack>
-				<TextFieldElement name="email" label="Email" required />
-				<TextFieldElement name="password" label="Password" required />
+				<TextFieldElement type="email" name="email" autoComplete="off" label="Email" required />
+				<TextFieldElement type="password" name="password" autoComplete="off" label="Password" required />
 				<Button type="submit">Login</Button>
 			</Stack>
 		</FormContainer>
