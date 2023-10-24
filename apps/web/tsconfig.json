@@ -6,6 +6,9 @@
       {
         "name": "next"
       }
+    ],
+    "types": [
+      "react-dom/experimental"
     ]
   },
   "include": [

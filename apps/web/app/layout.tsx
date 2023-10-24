@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeRegistry } from '_theme';
 import { ChildrenProps } from '_types';
+import { SnackbarProviderClient } from '_components';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: ChildrenProps): JSX.Element {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
+				<SnackbarProviderClient />
 				<ThemeRegistry>{children}</ThemeRegistry>
 			</body>
 		</html>
