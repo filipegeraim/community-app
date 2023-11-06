@@ -3,7 +3,6 @@ import React from 'react';
 import { Alert, Button, Stack } from '@mui/material';
 import { FormContainer, TextFieldElement, useForm } from 'react-hook-form-mui';
 import { UserInput } from 'types';
-import { register } from './actions';
 import {
 	//@ts-ignore
 	experimental_useFormState as useFormState,
@@ -22,21 +21,21 @@ export default function RegisterForm() {
 	const formContext = useForm<UserInput>({
 		defaultValues: { email: '', password: '', name: '' },
 	});
-	const [state, formAction] = useFormState(register, initialState);
+	//const [state, formAction] = useFormState(register, initialState);
 
-	React.useEffect(() => {
-		if (state?.message) {
-			enqueueSnackbar({ message: state.message, variant: 'success' });
-			router.replace('/auth/login');
-		}
-	}, [state]);
+	// React.useEffect(() => {
+	// 	if (state?.message) {
+	// 		enqueueSnackbar({ message: state.message, variant: 'success' });
+	// 		router.replace('/auth/login');
+	// 	}
+	// }, [state]);
 	return (
-		<FormContainer FormProps={{ autoComplete: 'off' }} formContext={formContext} onSuccess={formAction}>
+		<FormContainer FormProps={{ autoComplete: 'off' }} formContext={formContext}>
 			<Stack>
 				<TextFieldElement name="name" label="Name" required />
 				<TextFieldElement type="email" autoComplete="off" name="email" label="Email" required />
 				<TextFieldElement type="password" autoComplete="off" name="password" label="Password" required />
-				{state?.error && <Alert severity="error">{state.error}</Alert>}
+				{/* {state?.error && <Alert severity="error">{state.error}</Alert>} */}
 				<Button type="submit">Register</Button>
 			</Stack>
 		</FormContainer>

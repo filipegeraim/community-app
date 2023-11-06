@@ -22,7 +22,7 @@ export class AuthService {
     const jwt: AuthJwt = { sub: user.id, name: user.name };
     return {
       accessToken: this.jwtService.sign(jwt),
-      prefix: 'Bearer',
+      user: user,
     };
   }
 }
