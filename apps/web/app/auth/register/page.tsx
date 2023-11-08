@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, Container, Stack, Button } from '@mui/material';
 import { ArrowBack as BackIcon } from '@mui/icons-material';
 import RegisterForm from './form';
+import { fetchClient } from '_helpers/fetch';
 
 export default function RegisterPage(): JSX.Element {
 	return (

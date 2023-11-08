@@ -10,6 +10,7 @@ import {
 import { Fetch } from '_types';
 import { enqueueSnackbar } from 'notistack';
 import { useRouter } from 'next/navigation';
+import { fetchClient } from '_helpers/fetch';
 
 const initialState: Fetch = {
 	message: '',
@@ -17,6 +18,7 @@ const initialState: Fetch = {
 };
 
 export default function RegisterForm() {
+	
 	const router = useRouter();
 	const formContext = useForm<UserInput>({
 		defaultValues: { email: '', password: '', name: '' },

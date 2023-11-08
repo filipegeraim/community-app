@@ -1,4 +1,5 @@
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from './auth';
 
 async function handleResult<TResult = any>(result: Response): Promise<TResult> {
 	const json = await result.json();
@@ -9,11 +10,11 @@ async function handleResult<TResult = any>(result: Response): Promise<TResult> {
 	}
 }
 
-export async function fetchClient<TBody = any>(method: 'POST' | 'GET', url: string, body?: TBody) {
+export async function fetchClient<TResult = any>(method: 'POST' | 'GET', url: string, body?: any): Promise<TResult> {
 	const getTokenHeader = (token) => {
 		return token ? { 'Authorization': `Bearer ${token}` } : undefined;
 	};
-	const session = await getSession();
+	const session = await getServerSession(authOptions);
 	const response = await fetch(`${process.env.BASE_URL}/${url}`, {
 		method: method,
 		headers: {
@@ -22,5 +23,5 @@ export async function fetchClient<TBody = any>(method: 'POST' | 'GET', url: stri
 		},
 		body: body ? JSON.stringify(body) : undefined,
 	});
-	return handleResult(response);
+	return await handleResult<TResult>(response);
 }
