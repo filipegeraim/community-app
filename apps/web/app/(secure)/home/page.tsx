@@ -1,5 +1,5 @@
 'use client';
-import { Card, CardContent, CardHeader, Container, Stack, Link, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, Container, Typography } from '@mui/material';
 
 export default function HomePage(): JSX.Element {
 	return (

@@ -1,7 +1,8 @@
 import { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { fetchClient } from '_helpers/fetch';
 import { AuthOutput } from 'types';
-import { FetchClient } from '_helpers/fetch';
+import { JWT } from 'next-auth/jwt';
 
 export const authOptions: NextAuthOptions = {
 	pages: {
@@ -11,29 +12,27 @@ export const authOptions: NextAuthOptions = {
 		strategy: 'jwt',
 		maxAge: 1209600,
 	},
+	secret: process.env.JWT_SECRET,
 	providers: [
 		CredentialsProvider({
 			name: 'credentials',
 			credentials: {
 				email: {
-					label: 'Email',
 					type: 'email',
 				},
 				password: {
-					label: 'Password',
 					type: 'password',
 				},
 			},
 			async authorize(credentials) {
 				try {
-					console.log('entrou', credentials);
-					const response: AuthOutput = await FetchClient.post('auth/login', credentials);
+					const res: AuthOutput = await fetchClient('POST', 'auth/login', credentials);
 					return {
-						id: response.user.id.toString(),
-						email: response.user.email,
-						name: response.user.name,
-						accessToken: response.accessToken,
-					};
+						id: res.user.id,
+						email: res.user.email,
+						name: res.user.name,
+						accessToken: res.accessToken,
+					} as User;
 				} catch (ex) {
 					return null;
 				}
@@ -41,20 +40,19 @@ export const authOptions: NextAuthOptions = {
 		}),
 	],
 	callbacks: {
-		async jwt({ token, user, trigger, session }) {
-			return token;
+		async jwt({ token, user }) {
+			return { ...token, ...user } as JWT;
 		},
 		async session({ session, token }) {
 			if (token.error) {
 				throw new Error('Refresh token has expired');
 			}
-
+			session.accessToken = token.accessToken;
+			session.user.id = token.id;
+			session.user.email = token.email || '';
+			session.user.name = token.name || '';
 			return session;
 		},
 	},
-	events: {
-		async signIn(payload) {
-			console.log(payload);
-		},
-	},
+	events: {},
 };
