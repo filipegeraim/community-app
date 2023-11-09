@@ -19,7 +19,10 @@ export class PostService extends BaseService<Post> {
   }
 
   findByPk(id: number): Promise<Post> {
-    return super.findByPk(id);
+    return super.findByPk(id, {
+      relations: { createdBy: true, replies: true },
+      order: { replies: { createdAt: 'DESC' } },
+    });
   }
 
   update(id: number, payload: PostInput): Promise<Post> {
