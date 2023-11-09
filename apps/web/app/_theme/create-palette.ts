@@ -27,6 +27,9 @@ export const createPalette = (): PaletteOptions => ({
 	primary: {
 		main: palette.primary,
 	},
+	secondary: {
+		main: palette.secondary,
+	},
 	text: {
 		primary: palette.text,
 	},

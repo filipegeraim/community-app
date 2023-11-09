@@ -1,5 +1,4 @@
 'use server';
-import { FetchClient } from '_helpers/fetch';
 import { redirect } from 'next/navigation';
 import { AuthInput, AuthOutput } from 'types';
 import { cookies } from 'next/headers';

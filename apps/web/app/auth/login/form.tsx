@@ -19,7 +19,7 @@ export default function LoginForm() {
 	const [state, formAction] = useFormState(login, initialState);
 
 	const handleSubmit = (payload: AuthInput) => {
-		signIn('credentials', { ...payload, callbackUrl: '/home' });
+		signIn('credentials', { ...payload, callbackUrl: '/post' });
 	};
 
 	return (

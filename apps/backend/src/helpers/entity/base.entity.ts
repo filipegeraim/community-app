@@ -10,10 +10,8 @@ export abstract class BaseEntity implements Key {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Exclude()
   @CreateDateColumn()
   createdAt: Date;
-  @Exclude()
   @UpdateDateColumn()
   updatedAt: Date;
 

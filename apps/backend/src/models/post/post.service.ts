@@ -15,7 +15,7 @@ export class PostService extends BaseService<Post> {
   }
 
   findAll(): Promise<Post[]> {
-    return super.findAll();
+    return super.findAll({ relations: { createdBy: true }, order: { createdAt: 'DESC' } });
   }
 
   findByPk(id: number): Promise<Post> {

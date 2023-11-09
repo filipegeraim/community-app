@@ -10,4 +10,4 @@ export interface PostDef extends Description, CreatedBy, Key {
 }
 
 export type PostInput = Omit<PostDef, keyof Key>;
-export type PostOutput = Omit<PostDef, keyof Version | keyof CreatedBy | 'replies'>;
+export type PostOutput = Omit<PostDef, 'replies'>;
