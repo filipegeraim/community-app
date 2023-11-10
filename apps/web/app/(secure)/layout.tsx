@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material';
-import { Copyright, Navbar } from '_components';
+import { Copyright, Navbar } from '_components/ui';
 import { ChildrenProps } from '_types';
 
 export default function SecureLayout({ children }: ChildrenProps): JSX.Element {
@@ -16,7 +16,7 @@ export default function SecureLayout({ children }: ChildrenProps): JSX.Element {
 					flexDirection: 'column',
 				}}>
 				<Navbar />
-				<Container maxWidth="md" sx={{ pt: 5 }}>
+				<Container maxWidth="md" sx={{ pt: 3 }}>
 					{children}
 				</Container>
 				<Copyright />
