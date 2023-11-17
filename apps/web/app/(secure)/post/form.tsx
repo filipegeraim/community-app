@@ -3,6 +3,9 @@ import React from 'react';
 import { Button, DialogContent, Stack, Dialog, DialogActions, DialogTitle, Box } from '@mui/material';
 import { FormContainer, TextFieldElement, useForm } from 'react-hook-form-mui';
 import { PostInput } from 'types';
+import { useRouter } from 'next/navigation';
+import { createPost } from './action';
+import { enqueueSnackbar } from 'notistack';
 
 const initialState: PostInput = {
 	title: '',
@@ -10,19 +13,28 @@ const initialState: PostInput = {
 };
 
 export default function PostForm() {
+	const router = useRouter();
 	const formContext = useForm<PostInput>({
 		defaultValues: initialState,
 	});
 	const [open, setOpen] = React.useState(false);
 
-	const handleOpen = async () => {
+	const handleOpen = () => {
 		setOpen(true);
 	};
-	const handleClose = async () => {
+	const handleClose = () => {
 		setOpen(false);
 	};
 
-	const handleSubmit = async (payload: PostInput) => {};
+	const handleSubmit = async (payload: PostInput) => {
+		try {
+			await createPost(payload);
+			router.refresh();
+			handleClose();
+		} catch (error) {
+			enqueueSnackbar({ message: error.message, variant: 'error' });
+		}
+	};
 
 	return (
 		<>
