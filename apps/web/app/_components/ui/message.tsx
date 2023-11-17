@@ -4,7 +4,7 @@ import { ChevronRight as ChevronRightIcon } from '@mui/icons-material';
 import { format, parseISO } from 'date-fns';
 
 export interface MessageProps {
-	title: string;
+	title?: string;
 	description: string;
 	href?: string;
 	createdBy: string;
@@ -23,7 +23,7 @@ export default function Message(props: MessageProps) {
 				alignItems: 'center',
 			}}>
 			<Box>
-				<Typography variant="h5">{title}</Typography>
+				{title && <Typography variant="h5">{title}</Typography>}
 				<Typography variant="caption" color={(theme) => theme.palette.grey[500]}>
 					{`Posted by: ${createdBy} at ${format(parseISO(createdAt), 'yyyy-MM-dd hh:ss')}`}
 				</Typography>

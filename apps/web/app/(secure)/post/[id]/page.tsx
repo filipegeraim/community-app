@@ -14,13 +14,13 @@ export default async function PostByIdPage(props: PostByIdPageProps) {
 	const post = await getPostById(Number(params.id));
 	return (
 		<>
-			<Box>
-				<Typography variant="h4">{post.title}</Typography>
-				<Typography variant="body1">{post.description}</Typography>
-			</Box>
 			<Stack>
+				<Box>
+					<Typography variant="h4">{post.title}</Typography>
+					<Typography variant="body1">{post.description}</Typography>
+				</Box>
 				{post.replies.map((reply) => (
-					<Message title={''} description={''} createdBy={''} createdAt={''} />
+					<Message description={reply.description} createdBy={reply.createdBy.name} createdAt={reply.createdAt.toString()} />
 				))}
 			</Stack>
 		</>
