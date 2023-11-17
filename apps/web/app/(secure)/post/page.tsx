@@ -13,6 +13,7 @@ export default async function PostPage() {
 				<Stack>
 					{posts.map((post) => (
 						<Message
+							key={post.id}
 							title={post.title}
 							description={post.description}
 							href={`/post/${post.id}`}

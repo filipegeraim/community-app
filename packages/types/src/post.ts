@@ -8,5 +8,6 @@ export interface PostDef extends Description, CreatedBy, Key {
 	replies?: ReplyDef[];
 }
 
-export type PostInput = Omit<PostDef, keyof Key | keyof CreatedBy>;
-export type PostOutput = Omit<PostDef, 'replies'>;
+export type PostInput = Omit<PostDef, keyof Key | keyof CreatedBy | 'replies'>;
+export type PostListOutput = Omit<PostDef, 'replies'>;
+export type PostOutput = Required<PostDef>;
