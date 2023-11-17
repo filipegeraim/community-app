@@ -1,12 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseInterceptors, Put } from '@nestjs/common';
 import { PostService } from './post.service';
-import { PostInput } from 'types';
+import { PostInput, ReplyInput } from 'types';
 import { Post as PostEntity } from './post.entity';
 import { CreatedByInterceptor } from 'helpers/interceptors/';
+import { ReplyService } from 'models/reply/reply.service';
+import { Reply as ReplyEntity } from 'models/reply/reply.entity';
 
 @Controller('post')
 export class PostController {
-  constructor(private readonly postService: PostService) {}
+  constructor(private readonly postService: PostService, private readonly replyService: ReplyService) {}
 
   @UseInterceptors(CreatedByInterceptor<PostEntity>)
   @Post()
@@ -32,5 +34,12 @@ export class PostController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.postService.remove(id);
+  }
+
+  @UseInterceptors(CreatedByInterceptor<ReplyEntity>)
+  @Post(':id/reply')
+  async createReply(@Param('id', ParseIntPipe) id: number, @Body() payload: ReplyInput) {
+    const post = await this.postService.findByPk(id);
+    return this.replyService.create({ ...payload, post });
   }
 }
