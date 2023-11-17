@@ -3,15 +3,16 @@ import React from 'react';
 import { Button, DialogContent, Stack, Dialog, DialogActions, DialogTitle, Box } from '@mui/material';
 import { FormContainer, TextFieldElement, useForm } from 'react-hook-form-mui';
 import { PostInput } from 'types';
-import { createPost } from './action';
-import { useRouter } from 'next/navigation';
+
+const initialState: PostInput = {
+	title: '',
+	description: '',
+};
 
 export default function PostForm() {
-	const router = useRouter();
 	const formContext = useForm<PostInput>({
-		defaultValues: { title: '', description: '' },
+		defaultValues: initialState,
 	});
-	// const [state, formAction] = useFormState(login, initialState);
 	const [open, setOpen] = React.useState(false);
 
 	const handleOpen = async () => {
@@ -21,10 +22,7 @@ export default function PostForm() {
 		setOpen(false);
 	};
 
-	const handleSubmit = async (payload: PostInput) => {
-		await createPost(payload);
-		router.refresh();
-	};
+	const handleSubmit = async (payload: PostInput) => {};
 
 	return (
 		<>

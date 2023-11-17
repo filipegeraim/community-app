@@ -15,7 +15,6 @@ export default function Message(props: MessageProps) {
 	const { title, description, href, createdAt, createdBy } = props;
 	return (
 		<Paper
-			square
 			sx={{
 				p: 2,
 				display: 'flex',
